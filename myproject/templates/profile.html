@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<style>
+    body{
+        background-image: url("{% static 'images/common.jpg' %}");
+        background-size:cover;
+        height: 100vh;
+        color: white;
+    }
+
+    h2{
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
+        font-weight: bolder;
+    }
+</style>
+
+<div class="container-fluid" style="margin-top: 31px;">
+    <div class="col-md-offset-4 col-md-4">
+        <h2 class="page-header text-center">Student Profile</h2>
+    </div>
+    
+    <div class="col-md-offset-4 col-md-4 well" >
+            {% if messages %}   
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}}"> 
+                    {{message}}
+                </div>
+                {% endfor %}
+            {% endif %}
+            <table class="table table-bordered">
+                <tr>
+                    <th>Name:</th>
+                    <td>{{detail.name}}</td>
+                </tr>
+                <tr>
+                    <th>RollNo:</th>
+                    <td>{{detail.rollno}}</td>
+                </tr>
+                <tr>
+                    <th>Contact:</th>
+                    <td>{{detail.contact}}</td>
+                </tr>
+                {% if detail.testing %}
+                <tr>
+                    <th>Result:</th>
+                    <td>{{detail.score}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">                                   
+                    <div>
+                        <a href="#">
+                            <center>
+                                <button class="btn btn-primary disabled">Test Completed</button>
+                            </center>
+                        </a>
+                    </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <th>Result:</th>
+                    <td>please attend test</td>
+                </tr>
+                <tr>
+                    <td colspan="2">                                       
+                    <div>
+                        <a href="{% url 'test' student_id=detail.id %}">
+                            <button type="submit" class="btn btn-primary">Take Test</button>
+                        </a>
+                    </div>
+                    </td>
+                </tr>
+                {% endif %}
+            </table>
+    </div>
+</div>
+
+{% endblock %}

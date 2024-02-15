@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-image: url("{% static 'images/register.jpg' %}");
+        background-size: cover;
+        height: 100vh;
+        color: white;
+    }
+
+    input {
+        padding: 5px;
+        transition: background-color 0.3s ease;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bolder;
+    }
+
+    input:hover {
+        background-color: #F0ECE5;
+    }
+
+    h2{
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
+        font-weight: bolder;
+    }
+</style>
+
+    <div class="container-fluid" style="margin-top: 20px;">
+        <div class="col-md-offset-4 col-md-4">
+            <h2 class="page-header text-center">Student Registration</h2>
+        </div>
+        <div class="col-md-offset-4 col-md-4 well" >
+            <form method="POST" autocomplete="off">
+                {% csrf_token %}
+                {{form|crispy}}
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

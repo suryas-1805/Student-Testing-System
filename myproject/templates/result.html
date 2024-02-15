@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<style>
+    body{
+        background-image: url("{% static 'images/result.jpg' %}");
+        background-size:100%;
+        height: 100vh;
+        color: white;
+        background-attachment: fixed;
+    }
+
+    h2{
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
+        font-weight: bolder;
+    }
+    th,td{
+        text-align: center;
+    }
+</style>
+
+<div class="container-fluid" style="margin-top: 20px;">
+    <div class="col-md-offset-4 col-md-4">
+        <h2 class="page-header text-center">Result</h2>
+    </div>
+
+    <div class="col-md-offset-4 col-md-4 well" >
+            {% if messages %}   
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}}"> 
+                    {{message}}
+                </div>
+                {% endfor %}
+            {% endif %}
+            <table class="table table-bordered">
+                <tr>
+                    <th>Name:</th>
+                    <td>{{detail.name}}</td>
+                </tr>
+                <tr>
+                    <th>RollNo:</th>
+                    <td>{{detail.rollno}}</td>
+                </tr>
+                <tr>
+                    <th>Contact:</th>
+                    <td>{{detail.contact}}</td>
+                </tr>
+                <tr>
+                    <th>Result:</th>
+                    <td>{{detail.score}}</td>
+                </tr>
+            </table>
+    </div>
+</div>
+
+
+{% endblock %}

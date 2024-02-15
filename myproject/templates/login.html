@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<style>
+    body {
+        background-image: url("{% static 'images/login.jpg' %}");
+        background-size: cover;
+        height: 100vh;
+        color: white;
+    }
+
+    input {
+        padding: 5px;
+        transition: background-color 0.3s ease;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bolder;
+    }
+
+    input:hover {
+        background-color: #B6BBC4;
+    }
+
+    h2{
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
+        font-weight: bolder;
+    }
+
+    #signup:hover{
+        color: red;
+    }
+
+    #signup:active {
+    color:yellow;
+    }
+
+</style>
+
+<div class="container-fluid" style="margin-top: 20px;">
+    <div class="col-md-offset-4 col-md-4">
+        <h2 class="page-header text-center">Login</h2>
+    </div>
+    <div class="col-md-offset-4 col-md-4 well">
+        <form method="POST" autocomplete="off" action="{% url 'login' %}">
+            {% if messages %}
+                {% for message in messages %}
+                {% if message.tags == 'error' %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% else %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% csrf_token %}
+            
+            <div>
+                <label class="form-group" for="nameInput" style="display: inline-block;">Name *</label>
+            </div>
+            <div>
+                <input type="text" name="name" class="textinput form-control" id="nameInput" oninput="changeColor()" onclick="changeColor()" required>
+            </div><br>
+
+            <div>
+                <label class="form-group" for="passwordInput" style="display: inline-block;">Password *</label>
+            </div>
+            <div>
+                <input type="password" name="password" class="textinput form-control" id="passwordInput" oninput="changeColor()" onclick="changeColor()" required>
+            </div><br>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+            <div style="margin-top: 10px;">
+                New here? <a href="{% url 'register' %}" id="signup">Sign up</a> and discover
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function changeColor() {
+        var inputElement = document.activeElement;
+        if (inputElement.tagName.toLowerCase() === "input") {
+            inputElement.style.backgroundColor = "#F0ECE5";
+        }
+    }
+</script>
+
+{% endblock %}

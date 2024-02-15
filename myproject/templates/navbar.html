@@ -1,0 +1,24 @@
+<style>
+    .color {
+      background-color: #3498db; /* Change this to your desired background color */
+      border-color: #3498db; /* You may also want to adjust the border color */
+    }
+</style>
+
+<nav class="navbar navbar-inverse navbar-fixed-top color">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="#" class="navbar-brand" id="navanchor"><i class="fa fa-graduation-cap"></i> STUDENT TEST PANEL</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'home' %}" id="navanchor"><i class="fa fa-home"></i> Home</a></li>
+            {% if detail %}
+            <li><a href="{% url 'home' %}" id="navanchor"><i class="fa fa-sign-out"></i> Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}" id="navanchor"><i class="fa fa-sign-in"></i> Login</a></li>
+            <li><a href="{% url 'register' %}" id="navanchor"><i class="fa fa-user-plus"></i> Register</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+

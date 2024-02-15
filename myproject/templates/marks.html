@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<style>
+    body{
+        background-image: url("{% static 'images/marks.jpg' %}");
+        background-size:100%;
+        height: 100vh;
+        color: white;
+        background-attachment: fixed;
+    }
+
+    h2{
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
+        font-weight: bolder;
+    }
+    th,td{
+        text-align: center;
+    }
+</style>
+
+<div class="container-fluid" style="margin-top: 20px;">
+    <div class="col-md-offset-4 col-md-5">
+        <h2 class="text-primary page-header text-center">Mark List</h2>
+    </div>
+    <div class="col-md-offset-4 col-md-5 well" >
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}}"> 
+                    {{message}}
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% if data %}
+        <table class="table table-bordered">
+        <tr>
+            <th>S.No</th>
+            <th>Student Name</th>
+            <th>Register Number</th>
+            <th>Mark</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.name}}</td>
+                <td>{{i.rollno}}</td>
+                <td>{{i.score}}</td>
+        </tr>
+        {% endfor %}
+        </table>
+        {% else %}
+            <b><p class="text-center" style="font-size: 18px;">Mark list is empty</p></b>
+        {% endif %}
+        <div>
+            <a href="{% url 'home' %}">
+                <input type="button" value="Back" class="btn btn-primary pull-right">
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
